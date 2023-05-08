@@ -1,6 +1,7 @@
 #include "Board.h"
 #include "Piece.h"
 #include "Rook.h"
+#include "King.h"
 #include <memory>
 
 Board::Board()
@@ -32,6 +33,8 @@ void Board::initialize() {
 	_board[0][7] = new Rook(1, this, 0, 7);
 	_board[7][0] = new Rook(-1, this, 7, 0);
 	_board[7][7] = new Rook(-1, this, 7, 7);
+	_board[0][4] = new King(1, this, 0, 4);
+	_board[7][4] = new King(-1, this, 7, 4);
 }
 
 int Board::execute_command(int row_source, int col_source, int row_target, int col_target) {
