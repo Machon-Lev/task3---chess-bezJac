@@ -24,10 +24,9 @@ std::vector<std::tuple<int, int>> King::getAllvalidMoves() {
 				Piece* current = _game_board->getPiece(_row + i, _col + j);
 				if (current == nullptr)
 					moves.push_back(std::tuple<int, int>(_row + i, _col + j));
-				else if(current->getColor() != _game_board->getPlayer())	
+				else if(current->getColor() !=_color)	
 				{
 					moves.push_back(std::tuple<int, int>(_row + i, _col + j));
-					break;
 				}
 			}
 		}

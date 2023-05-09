@@ -34,7 +34,7 @@ std::vector<std::tuple<int, int>> Rook::traverseRows(std::vector<std::tuple<int,
 		Piece* current = _game_board->getPiece(i, _col);
 		if (current == nullptr)
 			moves.push_back(std::tuple<int, int>(i, _col));
-		else if (current->getColor() == _game_board->getPlayer())
+		else if (current->getColor() == _color)
 			break;
 		else {
 			moves.push_back(std::tuple<int, int>(i, _col));
@@ -47,7 +47,7 @@ std::vector<std::tuple<int, int>> Rook::traverseRows(std::vector<std::tuple<int,
 		Piece* current = _game_board->getPiece(i, _col);
 		if (current == nullptr)
 			moves.push_back(std::tuple<int, int>(i, _col));
-		else if (current->getColor() == _game_board->getPlayer())
+		else if (current->getColor() == _color)
 			break;
 		else {
 			moves.push_back(std::tuple<int, int>(i, _col));
@@ -63,7 +63,7 @@ std::vector<std::tuple<int, int>> Rook::traverseCols(std::vector<std::tuple<int,
 		Piece* current = _game_board->getPiece(_row, i);
 		if (current == nullptr)
 			moves.push_back(std::tuple<int, int>(_row, i));
-		else if (current->getColor() == _game_board->getPlayer())
+		else if (current->getColor() == _color)
 			break;
 		else {
 			moves.push_back(std::tuple<int, int>(_row, i));
@@ -76,7 +76,7 @@ std::vector<std::tuple<int, int>> Rook::traverseCols(std::vector<std::tuple<int,
 		Piece* current = _game_board->getPiece(_row,i);
 		if (current == nullptr)
 			moves.push_back(std::tuple<int, int>(_row, i));
-		else if (current->getColor() == _game_board->getPlayer())
+		else if (current->getColor() == _color)
 			break;
 		else {
 			moves.push_back(std::tuple<int, int>(_row, i));
