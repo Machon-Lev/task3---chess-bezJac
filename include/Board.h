@@ -13,9 +13,13 @@ class Piece;
 
 class Board {
 	Piece* _board[ROW_LENGTH][COL_LENGTH];
+	Piece* _white_king;
+	Piece* _black_king;
 	int _current_player;
+	int _check_mate;
 
 	void initialize();
+	std::tuple<int,int> getKingLocation(int player);
 public:
 	Board();
 	~Board();
@@ -24,6 +28,6 @@ public:
 	int getPlayer() { return _current_player; }
 	void movePiece(int s_row, int s_col, int t_row, int t_col);
 	void undoMove(int s_row, int s_col, int t_row, int t_col, Piece* target);
-	bool isInCheck(int player) { return false; }
-	bool isCheckMate(int player) { return false; }
+	bool isInCheck(int player);
+	bool isCheckMate(int player);
 };
