@@ -18,7 +18,7 @@ class Board {
 	int _current_player;
 	int _check_mate;
 
-	void initialize();
+	void initializeBoard();
 	std::tuple<int,int> getKingLocation(int player);
 public:
 	Board();
