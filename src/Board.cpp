@@ -5,6 +5,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "Pawn.h"
+#include "Knight.h"
 #include <memory>
 
 const int white_pawn_row = 1;
@@ -24,7 +25,10 @@ Board::~Board() {
 		for (int j = 0; j < COL_LENGTH; j++)
 		{
 			if (_board[i][j] != nullptr)
+			{
 				delete _board[i][j];
+				_board[i][j] = nullptr;
+			}
 		}
 	}
 	_white_king = nullptr;
@@ -49,6 +53,10 @@ void Board::initializeBoard() {
 	_board[7][5] = new Bishop(-1, this, 7, 5);
 	_board[0][3] = new Queen(1, this, 0, 3);
 	_board[7][3] = new Queen(-1, this, 7, 3);
+	_board[0][1] = new Knight(1, this, 0, 1);
+	_board[0][6] = new Knight(1, this, 0, 6);
+	_board[7][1] = new Knight(-1, this, 7, 1);
+	_board[7][6] = new Knight(-1, this, 7, 6);
 	for (int column = 0; column < COL_LENGTH; column++)
 	{
 		_board[white_pawn_row][column] = new Pawn(1, this, white_pawn_row, column);
