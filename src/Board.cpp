@@ -2,6 +2,7 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "King.h"
+#include "Bishop.h"
 #include <memory>
 
 Board::Board()
@@ -24,21 +25,23 @@ Board::~Board() {
 void Board::initialize() {
 
 	for (int i = 0; i < ROW_LENGTH; i++)
-	{
 		for (int j = 0; j < COL_LENGTH; j++)
-		{
 			_board[i][j] = nullptr;
-		}
-	}
+
 	_current_player = WHITE;
 	_board[0][0] = new Rook(1, this, 0, 0);
 	_board[0][7] = new Rook(1, this, 0, 7);
 	_board[7][0] = new Rook(-1, this, 7, 0);
 	_board[7][7] = new Rook(-1, this, 7, 7);
 	_board[0][4] = new King(1, this, 0, 4);
-	_white_king = _board[0][4];
 	_board[7][4] = new King(-1, this, 7, 4);
+	_board[0][2] = new Bishop(1, this, 0, 2);
+	_board[0][5] = new Bishop(1, this, 0, 5);
+	_board[7][2] = new Bishop(-1, this, 7,2);
+	_board[7][5] = new Bishop(-1, this, 7, 5);
+	
 	_black_king = _board[7][4];
+	_white_king = _board[0][4];
 	_check_mate = 0;
 }
 std::tuple<int, int> Board::getKingLocation(int player) {

@@ -4,5 +4,5 @@
 							  "Piece.cpp"
 							  "Rook.cpp" 
 							  "King.cpp"
-							  "Knight.cpp"
+							  "Bishop.cpp"
 )
