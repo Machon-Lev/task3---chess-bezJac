@@ -3,6 +3,7 @@
 #include "Rook.h"
 #include "King.h"
 #include "Bishop.h"
+#include "Queen.h"
 #include <memory>
 
 Board::Board()
@@ -39,6 +40,8 @@ void Board::initialize() {
 	_board[0][5] = new Bishop(1, this, 0, 5);
 	_board[7][2] = new Bishop(-1, this, 7,2);
 	_board[7][5] = new Bishop(-1, this, 7, 5);
+	_board[0][3] = new Queen(1, this, 0, 3);
+	_board[7][3] = new Queen(-1, this, 7, 3);
 	
 	_black_king = _board[7][4];
 	_white_king = _board[0][4];
