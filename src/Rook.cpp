@@ -9,12 +9,7 @@ bool Rook::isValidMove(int target_row, int target_col) {
 	if (_row != target_row && _col != target_col)
 		return false;
 
-	auto legalMoves = getAllvalidMoves();
-	std::tuple<int, int> move = std::make_tuple(target_row, target_col);
-	if (std::find(legalMoves.begin(), legalMoves.end(), move) == legalMoves.end())
-		return false;
-
-	return true;
+	return Piece::isValidMove(target_row, target_col);
 
 }
 

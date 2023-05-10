@@ -5,11 +5,7 @@ King::King(int color, Board* board, int row, int col) :Piece(color, board, row, 
 bool King::isValidMove(int target_row, int target_col) {
 	if (abs(target_row - _row) > 1 || abs(target_col - _col) > 1)
 		return false;
-	auto legalMoves = getAllvalidMoves();
-	std::tuple<int, int> move = std::make_tuple(target_row, target_col);
-	if (std::find(legalMoves.begin(), legalMoves.end(), move) == legalMoves.end())
-		return false;
-	return true;
+	return Piece::isValidMove(target_row, target_col);
 }
 
 std::vector<std::tuple<int, int>> King::getAllvalidMoves() {
