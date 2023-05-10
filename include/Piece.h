@@ -11,7 +11,7 @@ protected:
 	int _col;
 public:
 	Piece(int color, Board* board,int row,int col);
-	virtual bool isValidMove(int target_row, int target_col) = 0 ;
+	virtual bool isValidMove(int target_row, int target_col) ;
 	virtual std::vector<std::tuple<int, int>> getAllvalidMoves() = 0;
 	int getColor() { return _color; }
 	int getRow() { return _row; }
