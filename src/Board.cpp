@@ -4,11 +4,18 @@
 #include "King.h"
 #include "Bishop.h"
 #include "Queen.h"
+#include "Pawn.h"
 #include <memory>
+
+const int white_pawn_row = 1;
+const int black_pawn_row = 6;
 
 Board::Board()
 {
-	initialize();
+	initializeBoard();
+	_black_king = _board[7][4];
+	_white_king = _board[0][4];
+	_check_mate = 0;
 }
 
 Board::~Board() {
@@ -23,7 +30,7 @@ Board::~Board() {
 	_white_king = nullptr;
 	_black_king = nullptr;
 }
-void Board::initialize() {
+void Board::initializeBoard() {
 
 	for (int i = 0; i < ROW_LENGTH; i++)
 		for (int j = 0; j < COL_LENGTH; j++)
@@ -42,10 +49,12 @@ void Board::initialize() {
 	_board[7][5] = new Bishop(-1, this, 7, 5);
 	_board[0][3] = new Queen(1, this, 0, 3);
 	_board[7][3] = new Queen(-1, this, 7, 3);
+	for (int column = 0; column < COL_LENGTH; column++)
+	{
+		_board[white_pawn_row][column] = new Pawn(1, this, white_pawn_row, column);
+		_board[black_pawn_row][column] = new Pawn(-1, this,black_pawn_row, column);
+	}
 	
-	_black_king = _board[7][4];
-	_white_king = _board[0][4];
-	_check_mate = 0;
 }
 std::tuple<int, int> Board::getKingLocation(int player) {
 	return (player == WHITE) ? std::tuple<int, int>(_white_king->getRow(), _white_king->getCol()) : std::tuple<int, int>(_black_king->getRow(), _black_king->getCol());
