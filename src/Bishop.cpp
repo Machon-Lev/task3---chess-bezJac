@@ -16,13 +16,13 @@ std::vector<std::tuple<int, int>> Bishop::getAllvalidMoves() {
 	return moves;
 }
 
-std::vector<std::tuple<int, int>> Bishop::traverseleftToRightDiagonal(std::vector<std::tuple<int, int>>& moves) {
+void Bishop::traverseleftToRightDiagonal(std::vector<std::tuple<int, int>>& moves) {
 	for (int i = _row + 1, j = _col + 1; i < ROW_LENGTH && j < COL_LENGTH; i++, j++)
 	{
 		Piece* current = _game_board->getPiece(i, j);
 		if (current == nullptr)
 			moves.push_back(std::tuple<int, int>(i, j));
-		else if (current->getColor() == _color)
+		else if (current->getColor() == _color)			
 			break;
 		else {
 			moves.push_back(std::tuple<int, int>(i, j));
@@ -42,9 +42,8 @@ std::vector<std::tuple<int, int>> Bishop::traverseleftToRightDiagonal(std::vecto
 			break;
 		}
 	}
-	return moves;
 }
-std::vector<std::tuple<int, int>> Bishop::traverseRightToLeftDiagonal(std::vector<std::tuple<int, int>>& moves) {
+void  Bishop::traverseRightToLeftDiagonal(std::vector<std::tuple<int, int>>& moves) {
 	for (int i = _row + 1, j = _col - 1; i < ROW_LENGTH && j >=0; i++, j--)
 	{
 		Piece* current = _game_board->getPiece(i, j);
@@ -70,7 +69,6 @@ std::vector<std::tuple<int, int>> Bishop::traverseRightToLeftDiagonal(std::vecto
 			break;
 		}
 	}
-	return moves;
 }
 
 

@@ -4,9 +4,7 @@
 #include "pars_util.h"
 int main()
 {
-	//string board = "RNBQKBNRPPPPPPPP################################pppppppprnbqkbnr"; 
-//	string board = "##########K###############################R#############r#r#####";
-	string board = "R#BQKB#RPPPPPPPP################################ppppppppr#bqkb#r";
+	string board = "RNBQKBNRPPPPPPPP################################pppppppprnbqkbnr"; 
 	Chess a(board);
 	int codeResponse = 0;
 	string res = a.getInput();
@@ -27,14 +25,9 @@ int main()
 		42 - the last movement was legal, next turn
 		*/
 
-		/**/
-		//{ // put your code here instead that code
-		//	cout << "code response >> ";
-		//	cin >> codeResponse;
-		//}
-		/**/
-		int* parsed_command = ParsUtil::pars_chess_command(res);
-		codeResponse = game_board.execute_command(parsed_command[0], parsed_command[1], parsed_command[2], parsed_command[3]);
+		
+		int* parsed_command = ParsUtil::pars_chess_command(res);	// translate command to chess board indices	
+		codeResponse = game_board.execute_command(parsed_command[0], parsed_command[1], parsed_command[2], parsed_command[3]);	// attempt to execute the move - set code response to result of move
 		a.setCodeResponse(codeResponse);
 		res = a.getInput();
 	}

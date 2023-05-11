@@ -22,7 +22,7 @@ std::vector<std::tuple<int, int>> Rook::getAllvalidMoves() {
 }
 
 
-std::vector<std::tuple<int, int>> Rook::traverseRows(std::vector<std::tuple<int, int>>& moves) {
+void Rook::traverseRows(std::vector<std::tuple<int, int>>& moves) {
 	
 	for (int i = _row + 1; i < ROW_LENGTH; i++)
 	{
@@ -49,9 +49,8 @@ std::vector<std::tuple<int, int>> Rook::traverseRows(std::vector<std::tuple<int,
 			break;
 		}
 	}
-	return moves;
 }
-std::vector<std::tuple<int, int>> Rook::traverseCols(std::vector<std::tuple<int, int>>& moves) {
+void Rook::traverseCols(std::vector<std::tuple<int, int>>& moves) {
 
 	for (int i = _col + 1; i < COL_LENGTH; i++)
 	{
@@ -78,5 +77,4 @@ std::vector<std::tuple<int, int>> Rook::traverseCols(std::vector<std::tuple<int,
 			break;
 		}
 	}
-	return moves;
 }

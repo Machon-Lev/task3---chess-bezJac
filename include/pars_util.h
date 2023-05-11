@@ -3,8 +3,18 @@
 #include <map>
 #include <string>
 
+/**
+ * @brief Namespace containing utility functions for parsing chess commands for given chess gui implementation 
+ *
+ * The ParsUtil namespace provides a set of utility functions for parsing chess commands
+ * and converting them into the corresponding indices on a chess board.
+ */
 namespace ParsUtil {
-	const std::map<char, int>row_indexes = {
+
+	 /**
+	  * @brief Mapping of chess column characters to their corresponding row indices.
+	  */
+	static const std::map<char, int>row_indexes = {
 			{'A', 0},
 			{'B', 1},
 			{'C', 2},
@@ -23,7 +33,13 @@ namespace ParsUtil {
 			{'h', 7}
 	};
 
-	int* pars_chess_command(std::string command) {
+
+	/**
+	 * @brief Parses a chess command of format type "letter digit letter digit" and returns the corresponding indices on a chess board.
+	 * @param command The chess command to parse, e.g., "A1B5".
+	 * @return An array of integers representing the indices on a chess board [source_row, source_col, target_row, target_col].
+	 */
+	static int* pars_chess_command(std::string command) {
 
 		int indexes[4];
 		indexes[0]= row_indexes.at(command[0]);

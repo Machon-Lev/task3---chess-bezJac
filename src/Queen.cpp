@@ -14,7 +14,7 @@ std::vector<std::tuple<int, int>> Queen::getAllvalidMoves() {
 	return moves;
 }
 
-std::vector<std::tuple<int, int>> Queen::traverseleftToRightDiagonal(std::vector<std::tuple<int, int>>& moves) {
+void Queen::traverseleftToRightDiagonal(std::vector<std::tuple<int, int>>& moves) {
 	for (int i = _row + 1, j = _col + 1; i < ROW_LENGTH && j < COL_LENGTH; i++, j++)
 	{
 		Piece* current = _game_board->getPiece(i, j);
@@ -40,9 +40,8 @@ std::vector<std::tuple<int, int>> Queen::traverseleftToRightDiagonal(std::vector
 			break;
 		}
 	}
-	return moves;
 }
-std::vector<std::tuple<int, int>> Queen::traverseRightToLeftDiagonal(std::vector<std::tuple<int, int>>& moves) {
+void Queen::traverseRightToLeftDiagonal(std::vector<std::tuple<int, int>>& moves) {
 	for (int i = _row + 1, j = _col - 1; i < ROW_LENGTH && j >= 0; i++, j--)
 	{
 		Piece* current = _game_board->getPiece(i, j);
@@ -68,11 +67,9 @@ std::vector<std::tuple<int, int>> Queen::traverseRightToLeftDiagonal(std::vector
 			break;
 		}
 	}
-	return moves;
 }
 
-
-std::vector<std::tuple<int, int>> Queen::traverseRows(std::vector<std::tuple<int, int>>& moves) {
+void Queen::traverseRows(std::vector<std::tuple<int, int>>& moves) {
 
 	for (int i = _row + 1; i < ROW_LENGTH; i++)
 	{
@@ -99,9 +96,8 @@ std::vector<std::tuple<int, int>> Queen::traverseRows(std::vector<std::tuple<int
 			break;
 		}
 	}
-	return moves;
 }
-std::vector<std::tuple<int, int>> Queen::traverseCols(std::vector<std::tuple<int, int>>& moves) {
+void Queen::traverseCols(std::vector<std::tuple<int, int>>& moves) {
 
 	for (int i = _col + 1; i < COL_LENGTH; i++)
 	{
@@ -128,5 +124,4 @@ std::vector<std::tuple<int, int>> Queen::traverseCols(std::vector<std::tuple<int
 			break;
 		}
 	}
-	return moves;
 }

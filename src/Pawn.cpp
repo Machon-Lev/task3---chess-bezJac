@@ -16,10 +16,10 @@ std::vector<std::tuple<int, int>> Pawn::getAllvalidMoves() {
 	if (checkCellStatus(_row + increment, _col))		//forward move
 		moves.push_back(std::tuple<int, int>(_row + increment, _col));
 
-	if (checkCellStatus(_row + increment, _col + 1))		//diagonal 1
+	if (checkCellStatus(_row + increment, _col + 1))		//diagonal side 1
 		moves.push_back(std::tuple<int, int>(_row + increment, _col+1));
 
-	if (checkCellStatus(_row + increment, _col - 1))		// diagonal 2
+	if (checkCellStatus(_row + increment, _col - 1))		// diagonal side 2
 		moves.push_back(std::tuple<int, int>(_row + increment, _col-1));
 
 	if (!hasPawnMoved())				//inital double forward move
@@ -35,7 +35,9 @@ bool Pawn::hasPawnMoved() {
 		return (_row == 6) ? false : true;
 }
 bool Pawn::checkCellStatus(int row, int col) {
-
+	
+	// logic to check if cell is a legal move
+	// called by getAllValidMoves().
 	if (row >= ROW_LENGTH || col < 0 || col >= COL_LENGTH)
 		return false;
 

@@ -31,5 +31,5 @@ std::vector<std::tuple<int, int>> King::getAllvalidMoves() {
 
 }
 
-bool King::checkValidCell(int i, int j) { return (i < 0 || i > 7 || j < 0 || j > 7) ? false : true; }
+bool King::checkValidCell(int row, int col) { return (row < 0 || row > 7 || col < 0 || col > 7) ? false : true; }
 

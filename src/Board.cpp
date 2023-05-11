@@ -5,6 +5,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "Pawn.h"
+#include "Knight.h"
 #include <memory>
 
 const int white_pawn_row = 1;
@@ -15,7 +16,6 @@ Board::Board()
 	initializeBoard();
 	_black_king = _board[7][4];
 	_white_king = _board[0][4];
-	_check_mate = 0;
 }
 
 Board::~Board() {
@@ -24,7 +24,10 @@ Board::~Board() {
 		for (int j = 0; j < COL_LENGTH; j++)
 		{
 			if (_board[i][j] != nullptr)
+			{
 				delete _board[i][j];
+				_board[i][j] = nullptr;
+			}
 		}
 	}
 	_white_king = nullptr;
@@ -49,6 +52,10 @@ void Board::initializeBoard() {
 	_board[7][5] = new Bishop(-1, this, 7, 5);
 	_board[0][3] = new Queen(1, this, 0, 3);
 	_board[7][3] = new Queen(-1, this, 7, 3);
+	_board[0][1] = new Knight(1, this, 0, 1);
+	_board[0][6] = new Knight(1, this, 0, 6);
+	_board[7][1] = new Knight(-1, this, 7, 1);
+	_board[7][6] = new Knight(-1, this, 7, 6);
 	for (int column = 0; column < COL_LENGTH; column++)
 	{
 		_board[white_pawn_row][column] = new Pawn(1, this, white_pawn_row, column);
@@ -65,30 +72,33 @@ int Board::execute_command(int row_source, int col_source, int row_target, int c
 	Piece* source = _board[row_source][col_source];
 	Piece* target = _board[row_target][col_target];
 
-	if (source == nullptr)
+	// validate that -
+	// source has piece and belongs to player,
+	// target either has piece that bellongs to opponent or empty
+	// move itself is legal for piece
+	// player isn't in checkmate
+	if (source == nullptr)							
 		return 11;
-	if (source->getColor() != _current_player)
+	if (source->getColor() != _current_player)		
 		return 12;
-	if (target != nullptr && target->getColor() == _current_player)
+	if (target != nullptr && target->getColor() == _current_player) 
 		return 13;
-	if (_check_mate == _current_player)
-		return 31;
-	if (!source->isValidMove(row_target, col_target))
+	if (!source->isValidMove(row_target, col_target))			
 		return 21;
-	if (isInCheck(_current_player) && isCheckMate(_current_player))
-	{
-		_check_mate = _current_player;
+	if (isInCheck(_current_player) && isCheckMate(_current_player))  
 		return 31;
-	}
+
+	//execute the chess move
 	movePiece(row_source, col_source, row_target, col_target);
 
-	
+	// check that move does not cause current player to be in check
 	if (isInCheck(_current_player))
 	{
 		undoMove(row_source, col_source, row_target, col_target, target);
 		return 21;
 	}
 
+	// check if moves causes opponent to be in check
 	int result;
 	if (isInCheck(-(_current_player)))
 		result = 41;
@@ -99,7 +109,10 @@ int Board::execute_command(int row_source, int col_source, int row_target, int c
 		delete target;
 	target = nullptr;
 	source = nullptr;
+
+	//switch turns
 	_current_player = -_current_player;
+
 	return result;
 }
 
@@ -121,6 +134,9 @@ void Board::undoMove(int s_row, int s_col, int t_row, int t_col, Piece* target)
 }
 
 bool Board::isInCheck(int player) {
+
+	// iterate on board and check if any of opponents pieces have a legal move
+	// that can overtake current player's king.
 	std::tuple<int, int> king_location = getKingLocation(player);
 	for (int i = 0; i < ROW_LENGTH; i++)
 	{
@@ -139,8 +155,13 @@ bool Board::isInCheck(int player) {
 	return false;
 }
 bool Board::isCheckMate(int player) {
+	
 	int target_row, target_col;
 	Piece* target;
+
+	// iterate on board and for each piece of current player ,simulate all legal moves
+	// check if any move will cause player not to be in check - no checkmate
+	// no move was found - checkmate
 	for (int i = 0; i < ROW_LENGTH; i++)
 	{
 		for (int j = 0; j < COL_LENGTH; j++)
